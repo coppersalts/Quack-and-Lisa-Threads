@@ -10,6 +10,10 @@
 			window.addEventListener('load', async () => {
 				// threads = await (await fetch('threads.json')).json();
 				pageFilenames = await (await fetch('pages.json')).json();
+				const savedThreads = window.localStorage.getItem('threads');
+				if (savedThreads) {
+					threads = JSON.parse(savedThreads);
+				}
 				updatePage();
 			});
 
@@ -32,6 +36,7 @@
 				const textarea = document.querySelector('#threads-data');
 				if (textarea) {
 					threads = JSON.parse(textarea.value);
+					window.localStorage.setItem('threads', JSON.stringify(threads));
 					createMainPage();
 				}
 			}
