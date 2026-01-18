@@ -69,7 +69,7 @@
 					if (i > 0) newContent += '<hr>';
 					const pageNumber = threads[selectedThread][i];
 					if (pageNumber - 1 < pageFilenames.length) {
-						newContent += `<div class="page"><a href="https://quackandlisa.the-comic.org/comics/${pageNumber}/#content-start"><img src="${pageFilenames[pageNumber-1]}"></div>`;
+						newContent += `<div class="page"><a href="https://quackandlisa.the-comic.org/comics/${pageNumber}/#content-start"><img loading="lazy" src="${pageFilenames[pageNumber-1]}" height="1660" width="550"></div>`;
 					} else {
 						newContent += `<div class="page"><a href="https://quackandlisa.the-comic.org/comics/${pageNumber}/#content-start">(page ${pageNumber})</div>`;
 					}
@@ -82,6 +82,7 @@
 	margin: auto;
 	text-align: center;
 	display: block;
+	/*min-height: min(1660px, 100vh);*/
 }
 .page img {
 	height: auto;
