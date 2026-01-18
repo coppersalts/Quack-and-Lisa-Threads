@@ -54,7 +54,7 @@
 				newContent += '<br><button onClick="loadThreads()">Load Threads</button><ul>';
 				const threadNames = Object.keys(threads);
 				for (let i = 0; i < threadNames.length; i++) {
-					newContent += `<li><a href="#${threadNames[i]}">${threadNames[i]}</a></li>`;
+					newContent += `<li><a href="#${threadNames[i]}">${threadNames[i]}</a> (${threads[threadNames[i]].length} pages)</li>`;
 				}
 				newContent += '</ul>';
 				document.body.innerHTML = newContent;
