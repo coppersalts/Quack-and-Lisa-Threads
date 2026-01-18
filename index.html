@@ -8,7 +8,7 @@
 			let pageFilenames = [];
 			let selectedThread = '';
 			window.addEventListener('load', async () => {
-				threads = await (await fetch('threads.json')).json();
+				// threads = await (await fetch('threads.json')).json();
 				pageFilenames = await (await fetch('pages.json')).json();
 				updatePage();
 			});
@@ -20,7 +20,7 @@
 					createMainPage();
 				} else {
 					selectedThread = decodeURI(window.location.hash).slice(1);
-					if (Object.keys(threads) in selectedThread) {
+					if (Object.keys(threads).includes(selectedThread)) {
 						createThreadPage();
 					} else {
 						document.body.innerHTML = "There exists no thread by the specified name in your current threads list.";
@@ -28,8 +28,20 @@
 				}
 			}
 
+			function loadThreads() {
+				try {
+					const textarea = document.querySelector('#threads-data');
+					if (textarea) {
+						threads = JSON.parse(textarea.value);
+						createMainPage();
+					}
+				} catch (error) {
+					console.log('barney error');
+				}
+			}
+
 			function createMainPage() {
-				let newContent = '<ul>';
+				let newContent = '<textarea id="threads-data"></textarea><br><button onClick="loadThreads()">Load Threads</button><ul>';
 				const threadNames = Object.keys(threads);
 				for (let i = 0; i < threadNames.length; i++) {
 					newContent += `<li><a href="#${threadNames[i]}">${threadNames[i]}</a></li>`;
@@ -37,6 +49,7 @@
 				newContent += '</ul>';
 				document.body.innerHTML = newContent;
 			}
+
 			function createThreadPage() {
 				let newContent = '<a href="#">Home</a><br>';
 				for (let i = 0; i < threads[selectedThread].length; i++) {
