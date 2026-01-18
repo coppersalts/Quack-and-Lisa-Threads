@@ -10,4 +10,4 @@ There is no default set of threads, and they must be defined by the user. Thread
 }
 ```
 
-The list of page images is not garunteed to always be up-to-date, so more recent pages may not always display.
+The list of page images is not garunteed to always be up-to-date, so more recent pages may not always display. Links and page numbers are still included for pages without images.
