@@ -69,7 +69,7 @@
 			}
 
 			function createThreadPage() {
-				let newContent = '<a href="#">Home</a><br>';
+				let newContent = '<a href="#" id="home-button">Home</a><br>';
 				for (let i = 0; i < threads[selectedThread].length; i++) {
 					if (i > 0) newContent += '<hr>';
 					const pageNumber = threads[selectedThread][i];
@@ -93,6 +93,10 @@
 	height: auto;
 	width: auto;
 	max-width: 100%;
+}
+#home-button {
+	display: block;
+	position: fixed;
 }
 </style>
 	</head>
