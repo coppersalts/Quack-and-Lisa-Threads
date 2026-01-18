@@ -29,25 +29,33 @@
 			}
 
 			function loadThreads() {
-				try {
-					const textarea = document.querySelector('#threads-data');
-					if (textarea) {
-						threads = JSON.parse(textarea.value);
-						createMainPage();
-					}
-				} catch (error) {
-					console.log('barney error');
+				const textarea = document.querySelector('#threads-data');
+				if (textarea) {
+					threads = JSON.parse(textarea.value);
+					createMainPage();
 				}
 			}
 
 			function createMainPage() {
-				let newContent = '<textarea id="threads-data"></textarea><br><button onClick="loadThreads()">Load Threads</button><ul>';
+				let newContent = '';
+				let existingTextarea = document.querySelector('#threads-data');
+				if (existingTextarea) {
+					newContent += existingTextarea.outerHTML;
+					var oldTextareaValue = existingTextarea.value;
+					existingTextarea = true;
+				} else {
+					newContent += '<textarea id="threads-data"></textarea>';
+				}
+				newContent += '<br><button onClick="loadThreads()">Load Threads</button><ul>';
 				const threadNames = Object.keys(threads);
 				for (let i = 0; i < threadNames.length; i++) {
 					newContent += `<li><a href="#${threadNames[i]}">${threadNames[i]}</a></li>`;
 				}
 				newContent += '</ul>';
 				document.body.innerHTML = newContent;
+				if (existingTextarea) {
+					document.querySelector('#threads-data').value = oldTextareaValue;
+				}
 			}
 
 			function createThreadPage() {
