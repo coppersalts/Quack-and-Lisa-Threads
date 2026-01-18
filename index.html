@@ -36,8 +36,12 @@
 			function loadThreads() {
 				const textarea = document.querySelector('#threads-data');
 				if (textarea) {
-					threads = JSON.parse(textarea.value);
-					window.localStorage.setItem('threads', JSON.stringify(threads));
+					try {
+						threads = JSON.parse(textarea.value);
+						window.localStorage.setItem('threads', JSON.stringify(threads));
+					} catch {
+						threads = {"Error parsing JSON": []};
+					}
 					createMainPage();
 				}
 			}
