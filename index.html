@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Quack and Lisa Threads</title>
+		<meta charset="utf-8"></meta>
+		<script>
+			let threads = [];
+			let pageFilenames = [];
+			let selectedThread = '';
+			window.addEventListener('load', async () => {
+				threads = await (await fetch('threads.json')).json();
+				pageFilenames = await (await fetch('pages.json')).json();
+				updatePage();
+			});
+
+			window.addEventListener('hashchange', updatePage);
+
+			function updatePage() {
+				if (window.location.hash == '') {
+					createMainPage();
+				} else {
+					selectedThread = decodeURI(window.location.hash).slice(1);
+					createThreadPage();
+				}
+			}
+
+			function createMainPage() {
+				let newContent = '<ul>';
+				const threadNames = Object.keys(threads);
+				for (let i = 0; i < threadNames.length; i++) {
+					newContent += `<li><a href="#${threadNames[i]}">${threadNames[i]}</a></li>`;
+				}
+				newContent += '</ul>';
+				document.body.innerHTML = newContent;
+			}
+			function createThreadPage() {
+				let newContent = '<a href="#">Home</a><br>';
+				for (let i = 0; i < threads[selectedThread].length; i++) {
+					if (i > 0) newContent += '<hr>';
+					const pageNumber = threads[selectedThread][i];
+					newContent += `<div class="page"><a href="https://quackandlisa.the-comic.org/comics/${pageNumber}/#content-start"><img src="${pageFilenames[pageNumber-1]}"></div>`;
+				}
+				document.body.innerHTML = newContent;
+			}
+		</script>
+<style>
+.page {
+	margin: auto;
+	text-align: center;
+	display: block;
+}
+.page img {
+	height: auto;
+	width: auto;
+	max-width: 100%;
+}
+</style>
+	</head>
+	<body>
+	</body>
+</html>
