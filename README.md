@@ -1,5 +1,5 @@
 # Quack and Lisa Threads
-A tool for sotring pages by plot thread in the comic [Quack and Lisa](https://quackandlisa.the-comic.org/comics/first).
+A tool for sorting pages in the comic [Quack and Lisa](https://quackandlisa.the-comic.org/comics/first) by plot thread.
 
 There is no default set of threads, and they must be defined by the user. Threads are defined using a simple JSON format:
 ```json
