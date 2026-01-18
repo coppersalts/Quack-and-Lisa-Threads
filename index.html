@@ -20,7 +20,11 @@
 					createMainPage();
 				} else {
 					selectedThread = decodeURI(window.location.hash).slice(1);
-					createThreadPage();
+					if (Object.keys(threads) in selectedThread) {
+						createThreadPage();
+					} else {
+						document.body.innerHTML = "There exists no thread by the specified name in your current threads list.";
+					}
 				}
 			}
 
